@@ -7,9 +7,9 @@ class Program
         static void Main(string[] args)
         {
             Console.WriteLine("merhaba");
-            // InsertOneProduct();
-            InsertListProduct();
-            Console.WriteLine("kayıt başarılı");
+            //  InsertOneProduct();
+             // InsertListProduct();
+             GetAllData();
         }
         static void InsertOneProduct()  
         {
@@ -27,7 +27,7 @@ class Program
             var Productslist=new List<Product>(){
              new Product() {Name="Samsung S6",Price=6000,CategoryId=1},
              new Product(){Name="Samsung S7",Price=7000,CategoryId=1 },
-             new Product() {Name="Samsung S8", Price=8000,CategoryId=1}
+             new Product() {Name="Samsung S8", Price=8000,CategoryId=1},
              new Product() {Name="Samsung S9",Price=9000,CategoryId=1},
              new Product(){Name="Samsung S10",Price=10000,CategoryId=1 },
              new Product() {Name="Samsung S11", Price=11000,CategoryId=1}
@@ -40,7 +40,17 @@ class Program
                 db.SaveChanges();
             }
         }
+        static void GetAllData(){
+           using( var db =new ShopContext()){
+            var productlar=db.Products;
+            foreach (var p in productlar)
+            {
+                Console.WriteLine($"Name:{p.Name} Price:{p.Price}");
+            }
+           }
+        }
 
+     
     }
    
      public class ShopContext: DbContext
