@@ -28,6 +28,10 @@ class Program
              new Product() {Name="Samsung S6",Price=6000,CategoryId=1},
              new Product(){Name="Samsung S7",Price=7000,CategoryId=1 },
              new Product() {Name="Samsung S8", Price=8000,CategoryId=1}
+             new Product() {Name="Samsung S9",Price=9000,CategoryId=1},
+             new Product(){Name="Samsung S10",Price=10000,CategoryId=1 },
+             new Product() {Name="Samsung S11", Price=11000,CategoryId=1}
+
             };
            
 
