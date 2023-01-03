@@ -9,8 +9,15 @@ class Program
             Console.WriteLine("merhaba");
             //  InsertOneProduct();
              // InsertListProduct();
-             GetAllData();
+            //  GetAllProduct();
+            //  UpdateProdcut();
+            //   UpdateById();
+            UpdateById2(3,100);
         }
+     
+
+       
+
         static void InsertOneProduct()  
         {
             
@@ -40,7 +47,7 @@ class Program
                 db.SaveChanges();
             }
         }
-        static void GetAllData(){
+        static void GetAllProduct(){
            using( var db =new ShopContext()){
             var productlar=db.Products;
             foreach (var p in productlar)
@@ -49,8 +56,43 @@ class Program
             }
            }
         }
-
-     
+        static void UpdateProduct(){
+            using(var db=new ShopContext()){
+                var myproduct=db.Products.Where(p=>p.CategoryId==0).ToList();
+                if ( myproduct!=null)
+                {
+                    foreach (var p in myproduct)
+                    {
+                        //  p.Price*=0.5m; 
+                        p.Price+=10;
+                    }
+                  
+                    db.SaveChanges();
+                    Console.WriteLine("Prdoucts are updated");
+                }
+            }
+        }
+        static void UpdateById(){
+            using(var db =new ShopContext()){
+                var entity=new Product () {Id=1};
+                db.Products.Attach(entity);
+                entity.Price=0.1m;
+                db.SaveChanges();
+                Console.WriteLine("product is updated");
+            }
+        }
+        static void UpdateById2(int productId,int productPrice){
+            using(var db=new ShopContext()){
+                var p=db.Products.Where(c=>c.Id==productId).FirstOrDefault();
+                
+                p.Price=productPrice;
+                Console.WriteLine($"{p.Name} is updated ");
+              
+                db.SaveChanges();
+                
+            }
+        }    
+   
     }
    
      public class ShopContext: DbContext
