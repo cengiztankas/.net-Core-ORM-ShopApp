@@ -6,13 +6,15 @@ class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("merhaba");
+            Console.WriteLine("Hello Wellcome My App... this is a application which is .net core-Entity Framework-ORM");
             //  InsertOneProduct();
              // InsertListProduct();
             //  GetAllProduct();
             //  UpdateProdcut();
             //   UpdateById();
-            UpdateById2(3,100);
+            // UpdateById2(3,100);
+            // deleteProduct(13);
+           // deleteProduct2(20);
         }
      
 
@@ -47,6 +49,7 @@ class Program
                 db.SaveChanges();
             }
         }
+      
         static void GetAllProduct(){
            using( var db =new ShopContext()){
             var productlar=db.Products;
@@ -56,6 +59,7 @@ class Program
             }
            }
         }
+        
         static void UpdateProduct(){
             using(var db=new ShopContext()){
                 var myproduct=db.Products.Where(p=>p.CategoryId==0).ToList();
@@ -92,6 +96,23 @@ class Program
                 
             }
         }    
+
+        static void deleteProduct(int id){
+            using(var db=new ShopContext()) {
+                var entity=new Product(){Id=id};
+                db.Entry(entity).State=EntityState.Deleted;
+                db.SaveChanges();
+                Console.WriteLine("the product is deleted");
+            }
+        }
+        static void deleteProduct2(int id){
+            using(var db=new ShopContext()){
+                var p=db.Products.Where(c=>c.Id==id).FirstOrDefault();
+                db.Products.Remove(p);
+                db.SaveChanges();
+                Console.WriteLine("the product 2 is deleted");
+            }
+        }
    
     }
    
